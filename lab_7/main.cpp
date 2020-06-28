@@ -63,12 +63,25 @@ void output(const int X[], const int A[][N])
 	cout << "Массив X:\n";
 	for (int i = 0; i < N; i++)
 		cout << X[i] << "\t";
+	cout << endl;
+}
+
+double recur_y(const int A[][N], int d, int min, int max)
+{
+	if (d == 0) max = min = A[d][d];
+	if (d < N)
+	{
+		if (A[d][d] < min) min = A[d][d];
+		if (A[d][d] > max) max = A[d][d];
+		return recur_y(A, d + 1, min, max);
+	}
+	else return (min + max) / 2;
 }
 
 int main()
 {
 	setlocale(0, "");
-	int A[N][N]; int X[N], c, y;
+	int A[N][N]; int X[N], c;
 
 	void (*pfunc) (int [N][N]);
 	do
@@ -81,5 +94,8 @@ int main()
 	else pfunc = &filearr;
 
 	output(mas_x(A, X, pfunc), A);
+
+	cout << "Y = " << recur_y(A, 0, 0, 0);
+
 	_getch();
 }
