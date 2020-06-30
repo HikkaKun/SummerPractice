@@ -34,12 +34,27 @@ void print(int **A, const int N)
 	}
 }
 
+void check(int** A, const int N)
+{
+	int k = 0;
+	for (int i = 0; i < N - 1; i++)
+		for (int j = i + 1; j < N; j++)
+		{
+			while (k < N && A[k][i] == A[k][j])
+				k++;
+			if (k == N)
+				for (int l = 0; l < N; l++)
+					A[l][j] = 0;
+			k = 0;
+		}
+}
+
 int main()
 {
 	setlocale(0, "");
 
 	int N, ** p;
-	cout << "Введите размер массива:\n";
+	cout << "Введите размер матрицы:\n";
 	cin >> N;
 	p = new int* [N];
 	for (int i = 0; i < N; i++)
@@ -49,6 +64,9 @@ int main()
 	print(p, N);
 	sort(p, N);
 	cout << "Отсортированная матрица:\n";
+	print(p, N);
+	check(p, N);
+	cout << "Матрица после удаления дубликатов столбцов:\n";
 	print(p, N);
 
 	_getch();
