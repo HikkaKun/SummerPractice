@@ -25,7 +25,7 @@ void filearr(int X[N][N])
 	else
 	{
 		cout << "¬ходной файл отсутсвует\n";
-		exit;
+		exit(0);
 	}
 	file.close();
 }
